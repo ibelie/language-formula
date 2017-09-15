@@ -1,0 +1,25 @@
+'.source.formula':
+  'max':
+    'prefix': 'max'
+    'body': 'max(${0:value}, ...)'
+  'min':
+    'prefix': 'min'
+    'body': 'min(${0:value}, ...)'
+  'abs':
+    'prefix': 'abs'
+    'body': 'abs(${0:value})'
+  'map':
+    'prefix': 'map'
+    'body': 'map(${1:function}, ${0:list})'
+  'len':
+    'prefix': 'len'
+    'body': 'len(${0:value})'
+  'filter':
+    'prefix': 'filter'
+    'body': 'filter(${1:function}, ${0:list})'
+  'int':
+    'prefix': 'int'
+    'body': 'int(${0:value})'
+  'float':
+    'prefix': 'float'
+    'body': 'float(${0:value})'

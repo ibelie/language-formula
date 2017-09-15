@@ -1,0 +1,439 @@
+'scopeName': 'source.formula'
+'name': 'Formula'
+'fileTypes': [
+  'f'
+]
+'patterns': [
+  {
+    'include': '#line_comments'
+  }
+  {
+    'match': '\\b(?i:(0x\\h*)L)'
+    'name': 'constant.numeric.integer.long.hexadecimal.formula'
+  }
+  {
+    'match': '\\b(?i:(0x\\h*))'
+    'name': 'constant.numeric.integer.hexadecimal.formula'
+  }
+  {
+    'match': '\\b(?i:(0o?[0-7]+)L)'
+    'name': 'constant.numeric.integer.long.octal.formula'
+  }
+  {
+    'match': '\\b(?i:(0o?[0-7]+))'
+    'name': 'constant.numeric.integer.octal.formula'
+  }
+  {
+    'match': '\\b(?i:(0b[01]+)L)',
+    'name': 'constant.numeric.integer.long.binary.formula'
+  }
+  {
+    'match': '\\b(?i:(0b[01]+))',
+    'name': 'constant.numeric.integer.binary.formula'
+  }
+  {
+    'match': '\\b(?i:(((\\d+(\\.(?=[^A-Za-z_])\\d*)?|(?<=[^0-9A-Za-z_])\\.\\d+)(e[\\-\\+]?\\d+)?))J)'
+    'name': 'constant.numeric.complex.formula'
+  }
+  {
+    'match': '\\b(?i:(\\d+\\.\\d*(e[\\-\\+]?\\d+)?))(?=[^A-Za-z_])'
+    'name': 'constant.numeric.float.formula'
+  }
+  {
+    'match': '(?<=[^0-9A-Za-z_])(?i:(\\.\\d+(e[\\-\\+]?\\d+)?))'
+    'name': 'constant.numeric.float.formula'
+  }
+  {
+    'match': '\\b(?i:(\\d+e[\\-\\+]?\\d+))'
+    'name': 'constant.numeric.float.formula'
+  }
+  {
+    'match': '\\b(?i:([1-9]+[0-9]*|0)L)'
+    'name': 'constant.numeric.integer.long.decimal.formula'
+  }
+  {
+    'match': '\\b([1-9]+[0-9]*|0)'
+    'name': 'constant.numeric.integer.decimal.formula'
+  }
+  {
+    'comment': 'keyword operators that evaluate to true or false'
+    'name': 'keyword.operator.logical.formula'
+    'match': '\\b(in|or|and|not)\\b'
+  }
+  {
+    'name': 'constant.language.formula'
+    'match': '\\b(true|false)\\b'
+  }
+  {
+    'comment': 'ternary operator in formula'
+    'name': 'keyword.control.conditional.formula'
+    'match': '(\\?|:)'
+  }
+  {
+    'match': '<>|\\*\\*|//|<<|>>|&|\\||~|//\\=|&\\=|\\|\\=|%\\=|\\^\\=|>>\\=|<<\\=|\\*\\*\\='
+    'name': 'invalid.deprecated.operator.formula'
+  }
+  {
+    'match': '<\\=|>\\=|\\=\\=|<|>|\\!\\='
+    'name': 'keyword.operator.comparison.formula'
+  }
+  {
+    'match': '\\+\\=|-\\=|\\*\\=|/\\='
+    'name': 'keyword.operator.assignment.augmented.formula'
+  }
+  {
+    'match': '\\+|\\-|\\*|/|%|\\^'
+    'name': 'keyword.operator.arithmetic.formula'
+  }
+  {
+    'begin': '^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(=)'
+    'beginCaptures':
+      '1':
+        'name': 'entity.name.function.formula'
+      '2':
+        'name': 'punctuation.definition.function.formula'
+    'end': '(?=^\\s*[A-Za-z_][A-Za-z0-9_]*\\s*=\\s*)'
+    'name': 'meta.function.formula'
+    'patterns': [
+      {
+        'begin': '(?<==)\\s*(?=(\\s*#[^\\G]*)*[A-Za-z_][A-Za-z0-9_]*\\s*[,|:])'
+        'contentName': 'meta.function.parameters.formula'
+        'end': '(:)'
+        'endCaptures':
+          '1':
+            'name': 'punctuation.definition.parameters.end.formula'
+        'patterns': [
+          {
+            'include': '#line_comments'
+          }
+          {
+            'captures':
+              '1':
+                'name': 'variable.parameter.function.formula'
+              '2':
+                'name': 'punctuation.separator.parameters.formula'
+            'match': '\\b([A-Za-z_][A-Za-z_0-9]*)\\s*(,)?'
+          }
+        ]
+      }
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  {
+    'begin': '(?<=\\)|\\])\\s*(\\()'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.definition.arguments.begin.formula'
+    'contentName': 'meta.function-call.arguments.formula'
+    'end': '(\\))'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.arguments.end.formula'
+    'name': 'meta.function-call.formula'
+    'patterns': [
+      {
+        'include': '#separator_arguments'
+      }
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  {
+    'begin': '(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z_0-9]*)*\\s*\\()'
+    'end': '(\\))'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.arguments.end.formula'
+    'name': 'meta.function-call.formula'
+    'patterns': [
+      {
+        'begin': '(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*\\s*\\()'
+        'end': '(?=\\s*\\()'
+        'patterns': [
+          {
+            'include': '#property'
+          }
+        ]
+      }
+      {
+        'begin': '(\\()'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.definition.arguments.begin.formula'
+        'contentName': 'meta.function-call.arguments.formula'
+        'end': '(?=\\))'
+        'patterns': [
+          {
+            'include': '#separator_arguments'
+          }
+          {
+            'include': '$self'
+          }
+        ]
+      }
+    ]
+  }
+  {
+    'begin': '(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z_0-9]*)*\\s*\\[)'
+    'end': '(\\])'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.arguments.end.formula'
+    'name': 'meta.item-access.formula'
+    'patterns': [
+      {
+        'begin': '(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*\\s*\\[)'
+        'end': '(?=\\s*\\[)'
+        'patterns': [
+          {
+            'include': '#property'
+          }
+        ]
+      }
+      {
+        'begin': '(\\[)'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.definition.arguments.begin.formula'
+        'contentName': 'meta.item-access.arguments.formula'
+        'end': '(?=\\])'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+    ]
+  }
+  {
+    'begin': '(?<=\\)|\\])\\s+(\\[)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.definition.arguments.begin.formula'
+    'contentName': 'meta.item-access.arguments.formula'
+    'end': '(\\])'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.arguments.end.formula'
+    'name': 'meta.item-access.formula'
+    'patterns': [
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  {
+    'include': '#string'
+  }
+  {
+    'include': '#property'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.list.begin.formula'
+      '2':
+        'name': 'meta.empty-list.formula'
+      '3':
+        'name': 'punctuation.definition.list.end.formula'
+    'match': '(\\[)(\\s*(\\]))\\b'
+  }
+  {
+    'begin': '(\\[)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.definition.list.begin.formula'
+    'end': '(\\])'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.list.end.formula'
+    'name': 'meta.structure.list.formula'
+    'patterns': [
+      {
+        'begin': '(?<=\\[|\\,)\\s*(?![\\],])'
+        'contentName': 'meta.structure.list.item.formula'
+        'end': '\\s*(?:(,)|(?=\\]))'
+        'endCaptures':
+          '1':
+            'name': 'punctuation.separator.list.formula'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+    ]
+  }
+  {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.dictionary.begin.formula'
+      '2':
+        'name': 'meta.empty-dictionary.formula'
+      '3':
+        'name': 'punctuation.definition.dictionary.end.formula'
+    'match': '(\\{)(\\s*(\\}))'
+    'name': 'meta.structure.dictionary.formula'
+  }
+  {
+    'begin': '(\\{)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.definition.dictionary.begin.formula'
+    'end': '(\\})'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.dictionary.end.formula'
+    'name': 'meta.structure.dictionary.formula'
+    'patterns': [
+      {
+        'begin': '(?<=\\{|\\,|^)\\s*(?![\\},])'
+        'contentName': 'meta.structure.dictionary.key.formula'
+        'end': '\\s*(?:(?=\\})|(\\:))'
+        'endCaptures':
+          '1':
+            'name': 'punctuation.separator.valuepair.dictionary.formula'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+      {
+        'begin': '(?<=\\:|^)\\s*'
+        'contentName': 'meta.structure.dictionary.value.formula'
+        'end': '\\s*(?:(?=\\})|(,))'
+        'endCaptures':
+          '1':
+            'name': 'punctuation.separator.dictionary.formula'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+    ]
+  }
+]
+'repository':
+  'separator_arguments':
+    'match': ','
+    'name': 'punctuation.separator.arguments.formula'
+  'builtin_functions':
+    'match': '(?x)\\b(max|min|abs|map|len|filter)\\b'
+    'name': 'support.function.builtin.formula'
+  'builtin_types':
+    'match': '(?x)\\b(int|float|time|random)\\b'
+    'name': 'support.type.formula'
+  'constant_placeholder':
+    'match': '(?i:(%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?([hL][a-z]|[a-z%]))|(\\{([!\\[\\].:\\w ]+)?\\}))'
+    'name': 'constant.other.placeholder.formula'
+  'line_comments':
+    'begin': '(^[ \\t]+)?(?=#)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.whitespace.comment.leading.formula'
+    'end': '(?!\\G)'
+    'patterns': [
+      {
+        'begin': '#'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.formula'
+        'end': '\\n'
+        'name': 'comment.line.number-sign.formula'
+      }
+    ]
+  'property':
+    'begin': '(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*)'
+    'end': '(?![A-Za-z0-9_\\.])'
+    'name': 'meta.property.formula'
+    'patterns': [
+      {
+        'begin': '(\\.)(?=[A-Za-z_][A-Za-z0-9_]*)'
+        'end': '(?![A-Za-z0-9_])'
+        'patterns': [
+          {
+            'match': '[A-Za-z_][A-Za-z0-9_]*'
+            'name': 'entity.other.attribute-name.formula'
+          }
+        ]
+      }
+      {
+        'begin': '(?<!\\.)(?=[A-Za-z_][A-Za-z0-9_]*)'
+        'end': '(?![A-Za-z0-9_])'
+        'patterns': [
+          {
+            'include': '#builtin_functions'
+          }
+          {
+            'include': '#builtin_types'
+          }
+          {
+            'include': '#generic_names'
+          }
+        ]
+      }
+    ]
+  'escaped_char':
+    'captures':
+      '1':
+        'name': 'constant.character.escape.hex.formula'
+      '2':
+        'name': 'constant.character.escape.octal.formula'
+      '3':
+        'name': 'constant.character.escape.newline.formula'
+      '4':
+        'name': 'constant.character.escape.backlash.formula'
+      '5':
+        'name': 'constant.character.escape.double-quote.formula'
+      '6':
+        'name': 'constant.character.escape.single-quote.formula'
+      '7':
+        'name': 'constant.character.escape.bell.formula'
+      '8':
+        'name': 'constant.character.escape.backspace.formula'
+      '9':
+        'name': 'constant.character.escape.formfeed.formula'
+      '10':
+        'name': 'constant.character.escape.linefeed.formula'
+      '11':
+        'name': 'constant.character.escape.return.formula'
+      '12':
+        'name': 'constant.character.escape.tab.formula'
+      '13':
+        'name': 'constant.character.escape.vertical-tab.formula'
+    'match': '(\\\\x[0-9A-F]{2})|(\\\\[0-7]{3})|(\\\\\\n)|(\\\\\\\\)|(\\\\\\")|(\\\\\')|(\\\\a)|(\\\\b)|(\\\\f)|(\\\\n)|(\\\\r)|(\\\\t)|(\\\\v)'
+  'generic_names':
+    'match': '[A-Za-z_][A-Za-z0-9_]*'
+    'name': 'variable.language.formula'
+  'string':
+    'patterns': [
+      {
+        'begin': '(")'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.definition.string.begin.formula'
+        'comment': 'double quoted string'
+        'end': '((?<=")(")|")|(\\n)'
+        'endCaptures':
+          '1':
+            'name': 'punctuation.definition.string.end.formula'
+          '2':
+            'name': 'meta.empty-string.double.formula'
+          '3':
+            'name': 'invalid.illegal.unclosed-string.formula'
+        'name': 'string.quoted.double.single-line.formula'
+        'patterns': [
+          {
+            'include': '#constant_placeholder'
+          }
+          {
+            'include': '#escaped_char'
+          }
+        ]
+      }
+    ]
