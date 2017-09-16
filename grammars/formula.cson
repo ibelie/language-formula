@@ -326,7 +326,7 @@
     'match': '(?x)\\b(max|min|abs|map|len|filter)\\b'
     'name': 'support.function.builtin.formula'
   'builtin_types':
-    'match': '(?x)\\b(int|float|time|random)\\b'
+    'match': '(?x)\\b(int|float)\\b'
     'name': 'support.type.formula'
   'constant_placeholder':
     'match': '(?i:(%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?([hL][a-z]|[a-z%]))|(\\{([!\\[\\].:\\w ]+)?\\}))'
