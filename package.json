@@ -11,5 +11,12 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "main": "./lib/language-formula",
+  "providedServices": {
+    "autocomplete.provider": {
+      "versions": {
+        "2.0.0": "provide"
+      }
+    }
+  },
   "dependencies": {}
 }
