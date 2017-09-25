@@ -1,5 +1,5 @@
 '.source.formula':
-  'editor':
-    'commentStart': '# '
-    'increaseIndentPattern': '^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(=).*$'
-    'decreaseIndentPattern': '^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(=).*$'
+	editor:
+		commentStart: '# '
+		increaseIndentPattern: '^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(=).*$'
+		decreaseIndentPattern: '^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(=).*$'
