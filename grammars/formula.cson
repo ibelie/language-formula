@@ -348,7 +348,7 @@ repository:
 			}
 		]
 	property:
-		begin: '(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*)'
+		begin: '(?=(\\.)?[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*)'
 		end: '(?![A-Za-z0-9_\\.])'
 		name: 'meta.property.formula'
 		patterns: [
